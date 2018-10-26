@@ -13,13 +13,65 @@ describe('Footer "Product" section', () => {
             .should('eq', 'https://www.truecaller.com/truecaller')
     })
 
-    it('Support', () => {
+    it('User can open "Support" from footer', () => {
         cy
             .get(':nth-child(1) > [href="https://support.truecaller.com"]')
             .should('be.visible')
             .and('have.attr', 'href', 'https://support.truecaller.com')
             .and('have.attr', 'target', '_blank')
             .and('have.attr', 'rel', 'noopener')
+    })
+})
+
+describe('Footer "Company" section', () => {
+    beforeEach(function () {
+        cy
+            .visit('/')
+    })
+
+    it('User can navigate using "About" link', () => {
+        cy
+            .get('.footer-top > :nth-child(2) > [href="/about"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/about')
+    })
+
+    it('User can navigate using "Press" link', () => {
+        cy
+            .get('.footer-top > :nth-child(2) > [href="/press"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/press')
+    })
+
+    it('User can navigate using "Careers" link', () => {
+        cy
+            .get('.footer-top > :nth-child(2) > [href="/careers"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/careers')
+    })
+
+    it('User can navigate using "Contact" link', () => {
+        cy
+            .get('.footer-top > :nth-child(2) > [href="/contact"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/contact')
+    })
+
+    it('User can navigate using "Impact" link', () => {
+        cy
+            .get('.footer-top > :nth-child(2) > [href="/impact"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/impact')
     })
 })
 
