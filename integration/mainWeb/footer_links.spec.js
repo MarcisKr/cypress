@@ -1,4 +1,4 @@
-describe('Footer link test cases', () => {
+describe('Footer contractual links', () => {
     beforeEach(function () {
         cy
             .visit('/')
@@ -52,6 +52,13 @@ describe('Footer link test cases', () => {
         cy
             .request('https://www.truecaller.com/responsible-disclosure')
             .its('body').should('include', '<h2>Truecaller Responsible Disclosure</h2>')
+    })
+})
+
+describe('Footer social media buttons', () => {
+    beforeEach(function () {
+        cy
+            .visit('/')
     })
 
     it('Facebook button validation', () => {
