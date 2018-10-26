@@ -1,3 +1,28 @@
+describe('Footer "Product" section', () => {
+    beforeEach(function () {
+        cy
+            .visit('/')
+    })
+
+    it('User can navigate using "Get the app" link', () => {
+        cy
+            .get(':nth-child(1) > [href="/truecaller"]')
+            .click()
+        cy
+            .url()
+            .should('eq', 'https://www.truecaller.com/truecaller')
+    })
+
+    it('Support', () => {
+        cy
+            .get(':nth-child(1) > [href="https://support.truecaller.com"]')
+            .should('be.visible')
+            .and('have.attr', 'href', 'https://support.truecaller.com')
+            .and('have.attr', 'target', '_blank')
+            .and('have.attr', 'rel', 'noopener')
+    })
+})
+
 describe('Footer contractual links', () => {
     beforeEach(function () {
         cy
