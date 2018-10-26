@@ -75,6 +75,40 @@ describe('Footer "Company" section', () => {
     })
 })
 
+describe('Footer "Services" section', () => {
+    beforeEach(function () {
+        cy
+            .visit('/')
+    })
+
+    it('User can open "Developers" from footer', () => {
+        cy
+            .get(':nth-child(3) > [href="https://developer.truecaller.com/"]')
+            .should('be.visible')
+            .and('have.attr', 'href', 'https://developer.truecaller.com/')
+            .and('have.attr', 'target', '_blank')
+            .and('have.attr', 'rel', 'noopener')
+    })
+
+    it('User can open "Advertisers" from footer', () => {
+        cy
+            .get(':nth-child(3) > [href="https://advertisers.truecaller.com/"]')
+            .should('be.visible')
+            .and('have.attr', 'href', 'https://advertisers.truecaller.com/')
+            .and('have.attr', 'target', '_blank')
+            .and('have.attr', 'rel', 'noopener')
+    })
+
+    it('User can open "Business" from footer', () => {
+        cy
+            .get(':nth-child(3) > [href="https://business.truecaller.com/"]')
+            .should('be.visible')
+            .and('have.attr', 'href', 'https://business.truecaller.com/')
+            .and('have.attr', 'target', '_blank')
+            .and('have.attr', 'rel', 'noopener')
+    })
+})
+
 describe('Footer contractual links', () => {
     beforeEach(function () {
         cy
