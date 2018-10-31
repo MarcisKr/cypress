@@ -60,27 +60,24 @@ describe('Login test cases', () => {
             .get('.cookie-banner-close')
             .click({force: true})
         cy
-            .get('.TopNav__Link')
-            .click()
-        cy
             .window()
             .then(win => {
-                localStorage.tcstorage = '{"user":{"redirect":null,"enhancedSearch":true,"enhancedSearchTime":1521117641579,"accessToken":"gVB81DQTVTzXZG6dQ9ck1FjYt3yCMK3e"},"search":{"history":[],"country":{"CID":"India-Other","CN":"India","CCN":"in","CC":"91"}},"showCookieBanner":false}'
+                localStorage.truecallerStore = '{"user":{"redirect":"/","accessToken":"a1w1I------wudVhAbkywXt9H0ncTcX9zvab0Pc6HmIbk2_kNbNDAIxx24iexrnC","enhancedSearch":true,"email":"cypresstruecaller@gmail.com","name":"Cypress Automation","image":"https://lh5.googleusercontent.com/-3H-92sybLgA/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbCkgd5OXmdQBercdCthWDeE-nVi9g/mo/photo.jpg?sz=50","country":"lv","ipCountry":"lv","ipCountryDetected":true,"searchCountry":"lv","unlistCountry":"lv","searchQuery":"","searchHistory":[],"device":{"isMobile":false,"isIOS":false,"isAndroidOS":false}},"showCookieBanner":true}'
             })
         cy
-            .get('.sign-in-dialog-content > :nth-child(2)')
-            .click()
-            .should('not.exist')
-            .log("User has logged in")
+            .reload()
         cy
             .get('.TopNav__UserAvatar')
-            .click({force:true})
+            .should('be.visible')
+            .click({force: true})
+            .log("**User has been logged IN.**")   
         cy
             .get('.TopNav__UserMenuSignOut')
-            .click()
+            .click({force: true})
         cy
-            .contains('Sign in')
+            .get('.TopNav__Link')
             .should('be.visible')
+            .log("**User has been logged OUT.**")
     })
 
     it('log in after searching for a number(captcha blocked)', () => {
@@ -97,6 +94,9 @@ describe('Login test cases', () => {
             .get('.searchbar__submit')
             .click()
         cy
+            .get('.sign-in-dialog-cancel')
+            .click()
+        cy
             .get('.ProfileHeader > h3')
             .should('have.text', 'You need to sign in to view this result')
         cy
@@ -107,43 +107,23 @@ describe('Login test cases', () => {
             .should('eq', 'https://www.truecaller.com/search/se/735358210')
         cy
             .get('.ProfileHeader > .ProfileSignIn')
-            .click({force:true})
+            .should('be.visible')
         cy
             .window()
             .then(win => {
-                localStorage.tcstorage = '{"user":{"redirect":null,"enhancedSearch":true,"enhancedSearchTime":1521117641579,"accessToken":"gVB81DQTVTzXZG6dQ9ck1FjYt3yCMK3e"},"search":{"history":[],"country":{"CID":"India-Other","CN":"India","CCN":"in","CC":"91"}},"showCookieBanner":false}'
+                localStorage.truecallerStore = '{"user":{"redirect":"/","accessToken":"a1w1I------wudVhAbkywXt9H0ncTcX9zvab0Pc6HmIbk2_kNbNDAIxx24iexrnC","enhancedSearch":true,"email":"cypresstruecaller@gmail.com","name":"Cypress Automation","image":"https://lh5.googleusercontent.com/-3H-92sybLgA/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbCkgd5OXmdQBercdCthWDeE-nVi9g/mo/photo.jpg?sz=50","country":"lv","ipCountry":"lv","ipCountryDetected":true,"searchCountry":"lv","unlistCountry":"lv","searchQuery":"","searchHistory":[],"device":{"isMobile":false,"isIOS":false,"isAndroidOS":false}},"showCookieBanner":true}'
             })
         cy
-            .get('.sign-in-dialog-content > :nth-child(2)')
-            .click()
-            .should('not.exist')
-            .log("User has logged in")
+            .reload()
         cy
-            .get('.ProfileRecaptcha > :nth-child(1)')
+            .get('.TopNav__UserAvatar')
+            .should('be.visible')
+        cy
+            .get('.ProfileRecaptcha > :nth-child(1)', {timeout: 10000, frequency: 100})
             .should('be.visible')
         cy
             .get('.ProfileRecaptcha > :nth-child(2)')
             .should('be.visible')
     })
-    // it('login with microsoft account', () => { //can't see microsoft page...
-    //     cy
-    //         .window()
-    //         .then((win) => {
-    //             win.sessionStorage.clear()
-    //     })
-    //     cy
-    //         .clearLocalStorage()
-    //     cy
-    //         .get('.cookie-banner-close')
-    //         .click()
-    //     cy
-    //         .get('.TopNav__Link')
-    //         .click()
-    //     cy
-    //         .get('.sign-in-dialog-content > :nth-child(3)')
-    //         .click()
-    //     cy
-    //         .get('#i0116')
-    //         .click()
-    // })
+    
 })
